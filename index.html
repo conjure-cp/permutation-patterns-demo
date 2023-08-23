@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+
+  <link rel="stylesheet" href="index.css">
+
+
+  <title>Permutation Patterns</title>
+</head>
+
+<body>
+
+  <div id="patterncontainer" class="container d-flex flex-row align-items-center mb-2 mt-0 ">
+
+    <div class="d-flex w-50 left-column ">
+      <div class="d-flex p-3 w-100 align-items-center h-75">
+        <svg class="w-100 align-self-center" id="grid"></svg>
+
+      </div>
+      <div class="d-flex align-items-end">
+        <button type="button" class="btn btn-danger" id="clearpattern" data-toggle="tooltip" data-placement="top"
+          title="Click here to clear the pattern on the grid">Clear Pattern</button>
+      </div>
+    </div>
+
+
+    <div class="d-flex w-50 flex-column">
+      <div class=" d-flex justify-content-end ">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#userGuide">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-question-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+            <path
+              d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z">
+            </path>
+          </svg>
+        </button>
+      </div>
+      <div class="modal fade" id="userGuide" tabindex="-1" role="dialog" aria-labelledby="userGuide" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="userGuide">User Guide</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p><strong> A permutation problem consists of at least one underlying pattern and a search space, with
+                  there currently being a maximum of 5 underlying patterns that can be added.</strong></p>
+              <p><em>Adding an underlying pattern:</em> </p>
+              Enter a permutation and click submit to validate it. Doing this will show the appropriate visual
+              representation and show the button to add the underlying pattern. Larger permutations (i.e. has a 
+              length > 9) should have spaces in between each digit.  
+              <br> </br>
+              Select one of the 6 pattern types and whether you want the pattern to be an avoidance or containment
+              pattern.
+              <br> </br>
+              Depending on the pattern type you will be able to click on the grid to add a pattern (e.g. mesh
+              patterns), and this can be removed by clicking the clear pattern button.
+              <br> </br>
+              Add the underlying pattern by clicking the "add underlying pattern" button, which will add the pattern
+              to the "Added Pattern(s)" section
+              <br> </br>
+              <p><em>Viewing an added pattern:</em> </p>
+              Added patterns will be represented by buttons which can be clicked to show the pattern's details.
+              Clicking the button will allow you to update or delete the pattern with the corresponding buttons, and
+              clicking the button again will deselect it and will allow you to add another underlying pattern again.
+              <br> </br>
+              <p><em>Search space:</em> </p>
+              There are 6 permutation properties that can be chosen and it is possible to select more than one.  
+              <br> </br>
+              The length is the only input as part of the search space that is required and must be at least one larger than the smallest underlying pattern.
+              <br> </br>
+              Any number of statistics can also be selected, which will be shown for each solution to the permutation problem
+           
+              <br> </br>
+              <p><em>Solving</em></p>
+              Click the solve button to solve the permutation problem. This will lead you to a seperate page that will show all the solutions to the problem (max 10,000).
+              <br> </br>
+              Copying and pasting the url prior to clicking solve will maintain the parameters for the permutation problem, allowing you to share the link with others.  
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h3 class="align-self-center" data-toggle="tooltip" data-placement="top"
+        title="All the inputs required to add an underlying pattern"> Underlying Pattern</h3>
+      <div class="form-group justify-content-between row ">
+
+        <label for="permutation" class="col-sm-auto align-self-center col-form-label pr-0">Permutation:</label>
+        <div class="col-form-label col-sm-auto w-50 pl-0">
+          <input required class="form-control" id="permutation" name="permutation" data-toggle="tooltip"
+            data-placement="top" title="Enter the permutation for a pattern here. Use spaces in between the digits for permutations of a length larger than 9.">
+          <div class="invalid-feedback">
+            Permutation is invalid
+          </div>
+        </div>
+        <div class="col-sm-auto align-self-center pl-0"><input type="submit" class="btn btn-success"
+            id="permutationbutton" value="Resubmit" data-toggle="tooltip" data-placement="top"
+            title="Click here to confirm the permutation"> </input>
+        </div>
+
+      </div>
+      <div class="form-group justify-content-between row ">
+        <label for="representation" class="col-sm-auto align-self-center col-form-label pr-0"> Pattern Type:
+
+        </label>
+        <div class="col-form-label col-sm-auto w-75 pl-0">
+          <select class="form-control pt-0" name="representation" id="permrepresentation" data-toggle="tooltip"
+            data-placement="top" title="Select a pattern type">
+          </select>
+        </div>
+      </div>
+      <div id="include" class="form-group justify-content-between row">
+        <label for="include" class="col-sm-auto align-self-center col-form-label pr-0"></label>
+        <div class="align-self-center w-75">
+          <div class="form-check-inline">
+            <label class="form-check-label"><input checked class="form-check-input" type="radio" name="containment"
+                id="containment" value="true" data-toggle="tooltip" data-placement="top"
+                title="Click to indicate a containment pattern">Containment</label>
+
+          </div>
+          <div class="form-check-inline">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="containment"
+                id="avoidance" value="false" data-toggle="tooltip" data-placement="top"
+                title="Click to indicate an avoidance pattern">Avoidance</label>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex">
+        <button class="btn btn-danger w-50 align-self-start mb-2 mr-2" name="deletepatternbtn" id="deletepatternbtn"
+          data-toggle="tooltip" data-placement="top" title="Click here to delete this underlying pattern">
+          Delete Pattern</button>
+        <button class="btn btn-success w-50 align-self-end mb-2" name="addpatternbtn" id="addpatternbtn"
+          data-toggle="tooltip" data-placement="top" title="Click here to add/update the underlying pattern"> Add
+          Underlying
+          Pattern</button>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="d-flex flex-column container mt-2">
+    <div class="d-flex flex-row">
+      <h4 class="mt-2 mr-2" data-toggle="tooltip" data-placement="top" title="All the added underlying patterns. Click to select an added pattern and view it, and click it again to deselect it. "> Added
+        Pattern(s): </h4>
+      <div id="added-patterns-container" class="btn-group btn-group-toggle justify-content-between overflow-auto">
+
+      </div>
+    </div>
+
+  </div>
+  <div class="modal fade" name="maxPatterns" id="maxPatterns" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3> Warning</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="modalBody">
+          <p> You have reached the maximum number of patterns that can be added.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" name="noPatterns" id="noPatterns" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3> Warning</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="modalBody">
+          <p> You must add at least one underlying pattern to run the solver</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <div class="d-flex flex-column container w-50">
+    <h3 class="align-self-center mt-2" data-toggle="tooltip" data-placement="top"
+      title="All the inputs related to the search space"> Search Space</h3>
+
+    <div id="property" class="form-group justify-content-between row mt-2">
+      <label for="property" class="col-sm-auto align-self-center col-form-label pr-0" data-toggle="tooltip"
+        data-placement="top" title="Select the permutation properties">Properties:</label>
+      <div class="col align-self-center w-75" id="property_choices">
+      </div>
+    </div>
+
+    <div class="form-group justify-content-start row ">
+      <label for="length" class="col-sm-auto align-self-center col-form-label pr-0 ">Length:</label>
+      <div class="col-form-label col-sm-auto w-75 ">
+        <input required class="form-control" id="length" name="length" type="number" data-toggle="tooltip"
+          data-placement="top" title="Enter a length that all solutions must be (at least one larger than the shortest pattern)">
+        <div class="invalid-feedback">
+          Invalid length. 
+        </div>
+      </div>
+    </div>
+    <div id="statistic" class="form-group justify-content-between row">
+      <label for="statistic" class="col-sm-auto align-self-center col-form-label pr-0" data-toggle="tooltip"
+        data-placement="top" title="Select the statistics to be shown for each solution">Statistics:</label>
+      <div class="col align-self-center w-75" id="statistic_choices">
+        <div class="form-check-inline">
+          <label class="form-check-label"><input id="all-statistic" class="form-check-input" type="checkbox"
+              name="statistic" id="all" value="all">All</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="d-flex flex-column container">
+    <button class="btn btn-success w-25 align-self-end mb-4" id="solvebtn" data-toggle="tooltip" data-placement="top"
+      title="Click here to solve the problem with the provided inputs"> Solve</button>
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <script src="global.js" type="text/javascript"></script>
+  <script src="permutationvalidation.js" type="text/javascript"> </script>
+  <script src="index.js" type="text/javascript"></script>
+  <script src="grid.js" type="text/javascript"></script>
+
+</body>
+
+</html>
