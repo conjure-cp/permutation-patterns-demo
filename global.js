@@ -13,7 +13,7 @@ var property = JSON.stringify({
   "prop_simple": "Simple",
   "prop_block_wise_simple": "Block-wise Simple",
   "prop_plus_decomposable": "Plus Decomposable",
-  "prop_mins_decomposable": "Mins Decomposable",
+  "prop_mins_decomposable": "Minus Decomposable",
   "prop_involution": "Involution",
   "prop_derangement": "Derangement",
   "prop_non_derangement": "Non-derangement"
