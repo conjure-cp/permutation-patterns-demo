@@ -11,7 +11,7 @@ function getResult() {
     var solverDone = false;
 
     if (!solverDone) {
-        fetch("https://demos.constraintmodelling.org/server/get", {
+        fetch("https://conjure-aas.cs.st-andrews.ac.uk/get", {
             method: 'POST', headers: {
                 'Content-Type': 'application/json'
             },  body: JSON.stringify({ jobid: id, appName: "permutation-patterns" })

@@ -389,7 +389,7 @@ $(document).on('click', '#solvebtn', function () {
                                 conjure_options: ["--number-of-solutions", "10000"],
                                 appName: "permutation-patterns"
                             }
-                            fetch("https://demos.constraintmodelling.org/server/submit", { //access the conjure backend
+                            fetch("https://conjure-aas.cs.st-andrews.ac.uk/submit", { //access the conjure backend
                                 method: 'POST', headers: {
                                     'Content-Type': 'application/json'
                                 }, body: JSON.stringify(details)
