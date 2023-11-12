@@ -1,16 +1,19 @@
-name: Deploy to Github Pages
+name: Deploy to the gh-pages branch
 
 on:
   push:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Build
         run: |
@@ -23,4 +26,4 @@ jobs:
         with:
           branch: gh-pages
           folder: build
-          ssh-key: ${{ secrets.DEPLOY_KEY }}
+          clean: true
