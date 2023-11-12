@@ -1,5 +1,8 @@
 name: Build test
 
+# this action doesn't really do very much
+# we might update it to add a build preview in the future
+
 on:
   workflow_dispatch:        # can be triggered manually
   pull_request:             # and for PRs
@@ -9,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Build
         run: |
