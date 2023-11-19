@@ -18,6 +18,7 @@ jobs:
       - name: Build
         run: |
           mkdir build
+          cp -r assets component styles index.html build
           cp *.json *.js *.css *.html combined.essence build
           touch build/.nojekyll
 
