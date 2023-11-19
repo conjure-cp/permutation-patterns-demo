@@ -14,9 +14,8 @@
 
   <script src="https://d3js.org/d3.v4.min.js"></script>
 
-  <link rel="stylesheet" href="/styles/index.css">
-  <link rel="stylesheet" href="/styles/banner.css">
   <link rel="stylesheet" href="/styles/output.css" >
+  <link rel="stylesheet" href="/styles/index.css">
 
   <title>Permutation Patterns</title>
 </head>
@@ -31,7 +30,7 @@
 
       </div>
       <div class="d-flex align-items-end">
-        <button type="button" class="btn btn-danger" id="clearpattern" data-toggle="tooltip" data-placement="top"
+        <button type="button" class="bg-red-600 btn btn-danger" id="clearpattern" data-toggle="tooltip" data-placement="top"
           title="Click here to clear the pattern on the grid">Clear Pattern</button>
       </div>
     </div>
@@ -54,7 +53,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="userGuide">User Guide</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button type="button" class="bg-stone-600 close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -242,14 +241,14 @@
   </div>
 <!-- 5. Banner -->
   <div id="banner">
-    <div class="banner-container text-white p-4">
+    <div class="banner-container p-4 ">
       <div class="container m-auto grid grid-cols-5 grid-flow-col-dense gap-2">
         <!-- Logo Section -->
         <div class="col-span-2 row-span-5 flex flex-col items-start p-4">
           <div class="flex items-center m-1">
-            <img src="assets/images/conjure-cp-logo.png" alt="conjure-cp" class="w-8 h-8">
+            <img src="assets/images/conjure-cp-logo.png" alt="conjure-cp" class="w-16 h-16">
             <div class="text-xl font-semibold ml-4">
-              <a href="#" class="banner-logo-link hover:underline"> <!-- Logo Text Placeholder --> </a>
+              <a href="#" class="banner-logo-link text-black hover:underline"> <!-- Logo Text Placeholder --> </a>
             </div>
           </div>
           <div class="banner-title text-3xl font-bold tracking-wide mb-4 m-1"> <!-- Title Text Placeholder --> </div>
@@ -266,7 +265,7 @@
         <div class="row-start-2 col-span-1 flex flex-col items-stretch">
           <span class="text-lg font-semibold mb-2">Project Author</span>
           <div class="grid grid-cols-2 grid-flow-col gap-2 overflow-auto">
-            <a href="#" class="banner-author-link mb-1 hover:underline">
+            <a href="#" class="banner-author-link mb-1 text-black hover:underline">
               <!-- Author Text Placeholder -->
             </a>
           </div>
@@ -286,13 +285,13 @@
         <!-- Additional Links -->
         <div class="row-start-4 col-span-1 flex flex-col items-stretch">
           <span class="text-lg font-semibold mb-2">Links</span>
-          <a href="#" class="banner-github-link mb-1 hover:underline">
+          <a href="#" class="banner-github-link mb-1 text-black hover:underline">
             Source code
           </a>
-          <a href="#" class="banner-github-readme-link mb-1 hover:underline">
+          <a href="#" class="banner-github-readme-link mb-1 text-black hover:underline">
             Documentation
           </a>
-          <a href="#" class="banner-github-preview-link mb-1 hover:underline">
+          <a href="#" class="banner-github-preview-link mb-1 text-black hover:underline">
             Example Screenshots
           </a>
         </div>
@@ -300,7 +299,7 @@
         <!-- Contact Section -->
         <div class="row-start-4 col-span-1 flex flex-col items-stretch">
           <span class="text-lg font-semibold mb-2">Contact us</span>
-          <a href="#" class="banner-github-issues-link hover:underline">
+          <a href="#" class="banner-github-issues-link text-black hover:underline">
             Report an Issue
           </a>
         </div>

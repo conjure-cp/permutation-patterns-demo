@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const contributorsElement = document.getElementById('contributors');
         contributorsElement.innerHTML = data
           .filter(contributor => contributor.login !== 'williamburns' && !contributor.login.endsWith('[bot]'))
-          .map(contributor => `<a href="https://github.com/${contributor.login}" class="mb-1 hover:underline pr-4">${contributor.login}</a>`)
+          .map(contributor => `<a href="https://github.com/${contributor.login}" class="mb-1 text-black hover:underline pr-4">${contributor.login}</a>`)
           .join('');
       })
       .catch(error => console.error('Error:', error));
