@@ -9,10 +9,10 @@ const bannerConfig = {
     license       : 'Mozilla Public License 2.0'
   };
   
-document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', () => {
     // Populate banner with config data
     const logoElement = document.querySelector('.banner-logo-link');
-    logoElement.href = bannerConfig.author_github;
+    logoElement.href = bannerConfig.github; // Assuming the logo should link to the GitHub repository
     logoElement.textContent = bannerConfig.logo;
   
     const titleElement = document.querySelector('.banner-title');
@@ -23,10 +23,21 @@ document.addEventListener('DOMContentLoaded', () => {
   
     const licenseElement = document.querySelector('.banner-license');
     licenseElement.textContent = `License: ${bannerConfig.license}`;
-  
-    const githubLinks = document.querySelectorAll('.banner-github-link');
+
+    // Populate Project Author
+    const authorLink = document.querySelector('.banner-author-link');
+    authorLink.href = bannerConfig.author_github;
+    authorLink.textContent = bannerConfig.author;
+
+    const githubLinks = document.querySelectorAll('.banner-github-link, .banner-github-readme-link, .banner-github-preview-link');
     githubLinks.forEach(link => {
-      link.href = bannerConfig.github;
+      if (link.classList.contains('banner-github-link')) {
+        link.href = bannerConfig.github;
+      } else if (link.classList.contains('banner-github-readme-link')) {
+        link.href = `${bannerConfig.github}#readme`;
+      } else if (link.classList.contains('banner-github-preview-link')) {
+        link.href = `${bannerConfig.github}#application-preview`;
+      }
     });
   
     // Fetch contributors from GitHub
@@ -36,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const contributorsElement = document.getElementById('contributors');
         contributorsElement.innerHTML = data
           .filter(contributor => contributor.login !== 'williamburns' && !contributor.login.endsWith('[bot]'))
-          .map(contributor => `<a href="https://github.com/${contributor.login}" class="mb-1 text-black hover:underline pr-4">${contributor.login}</a>`)
+          .map(contributor => `<a href="https://github.com/${contributor.login}" class="mb-1 text-black hover:underline hover:text-stone-700 pr-4">${contributor.login}</a>`)
           .join('');
       })
       .catch(error => console.error('Error:', error));
