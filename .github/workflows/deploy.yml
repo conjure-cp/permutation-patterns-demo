@@ -19,7 +19,7 @@ jobs:
         run: |
           mkdir build
           cp -r assets component styles index.html build
-          cp *.json *.html combined.essence build
+          cp *.json *.html *.js combined.essence build
           touch build/.nojekyll
 
       - name: Deploy to GitHub Pages
