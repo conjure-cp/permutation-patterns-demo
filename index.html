@@ -14,15 +14,15 @@
 
   <script src="https://d3js.org/d3.v4.min.js"></script>
 
-  <link rel="stylesheet" href="index.css">
-
+  <link rel="stylesheet" href="./styles/output.css" >
+  <link rel="stylesheet" href="./styles/index.css">
 
   <title>Permutation Patterns</title>
 </head>
 
 <body>
-
-  <div id="patterncontainer" class="container d-flex flex-row align-items-center mb-2 mt-0 ">
+  <!-- 1. Underlying Pattern -->
+  <div id="patterncontainer" class="container d-flex flex-row align-items-center p-4 ">
 
     <div class="d-flex w-50 left-column ">
       <div class="d-flex p-3 w-100 align-items-center h-75">
@@ -30,7 +30,7 @@
 
       </div>
       <div class="d-flex align-items-end">
-        <button type="button" class="btn btn-danger" id="clearpattern" data-toggle="tooltip" data-placement="top"
+        <button type="button" class="bg-red-600 btn btn-danger" id="clearpattern" data-toggle="tooltip" data-placement="top"
           title="Click here to clear the pattern on the grid">Clear Pattern</button>
       </div>
     </div>
@@ -53,7 +53,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="userGuide">User Guide</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button type="button" class="bg-stone-600 close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -155,11 +155,13 @@
 
     </div>
   </div>
-
-  <div class="d-flex flex-column container mt-2">
-    <div class="d-flex flex-row">
-      <h4 class="mt-2 mr-2" data-toggle="tooltip" data-placement="top" title="All the added underlying patterns. Click to select an added pattern and view it, and click it again to deselect it. "> Added
-        Pattern(s): </h4>
+  <!-- 2. Added Pattern(s) -->
+  <div class="d-flex flex-column container p-4">
+    <div class="d-flex align-items-center">
+      <h4 class="mt-2 mr-2 p-4" data-toggle="tooltip" data-placement="top" 
+          title="All the added underlying patterns. Click to select an added pattern and view it, and click it again to deselect it. "> 
+          Added Pattern(s): 
+      </h4>
       <div id="added-patterns-container" class="btn-group btn-group-toggle justify-content-between overflow-auto">
 
       </div>
@@ -200,6 +202,7 @@
   </div>
   </div>
   </div>
+  <!-- 3. Search Space -->
   <div class="d-flex flex-column container w-50">
     <h3 class="align-self-center mt-2" data-toggle="tooltip" data-placement="top"
       title="All the inputs related to the search space"> Search Space</h3>
@@ -233,10 +236,82 @@
 
     </div>
   </div>
+<!-- 4. Solve Button -->
   <div class="d-flex flex-column container">
     <button class="btn btn-success w-25 align-self-end mb-4" id="solvebtn" data-toggle="tooltip" data-placement="top"
       title="Click here to solve the problem with the provided inputs"> Solve</button>
   </div>
+<!-- 5. Banner -->
+  <div id="banner" class="bg-stone-100">
+    <div class="banner-container p-4 ">
+      <div class="container m-auto grid grid-cols-5 grid-flow-col-dense gap-2">
+        <!-- Logo Section -->
+        <div class="col-span-2 row-span-5 flex flex-col items-start p-4">
+          <div class="flex items-center m-1">
+            <img src="assets/images/conjure-cp-logo.png" alt="conjure-cp" class="w-16 h-16">
+            <div class="text-xl font-semibold ml-4">
+              <a href="#" class="banner-logo-link text-black hover:underline hover:text-stone-700"> <!-- Logo Text Placeholder --> </a>
+            </div>
+          </div>
+          <div class="banner-title text-3xl font-bold tracking-wide mb-4 m-1"> <!-- Title Text Placeholder --> </div>
+          <div class="banner-description mb-2 m-1"> <!-- Description Text Placeholder --> </div>
+          <div class="banner-license mb-2 m-1">
+            License: <!-- License Text Placeholder -->
+          </div>
+        </div>
+    
+        <!-- Horizontal Line -->
+        <div class="row-start-1 col-span-5 border-t border-stone-700"></div>
+    
+        <!-- Project Author -->
+        <div class="row-start-2 col-span-1 flex flex-col items-stretch">
+          <span class="text-lg font-semibold mb-2">Project Author</span>
+          <div class="grid grid-cols-2 grid-flow-col gap-2 overflow-auto">
+            <a href="#" class="banner-author-link mb-1 text-black hover:underline hover:text-stone-700">
+              <!-- Author Text Placeholder -->
+            </a>
+          </div>
+        </div>
+    
+        <!-- Project Contributors -->
+        <div class="row-start-2 col-span-2 flex flex-col items-stretch">
+          <span class="text-lg font-semibold mb-2">Project Contributors</span>
+          <p class="text-sm" id="contributors">
+            <!-- Contributors will be loaded here by JavaScript -->
+          </p>
+        </div>
+    
+        <!-- Horizontal Line -->
+        <div class="row-start-3 col-span-3 border-t border-slate-700"></div>
+    
+        <!-- Additional Links -->
+        <div class="row-start-4 col-span-1 flex flex-col items-stretch">
+          <span class="text-lg font-semibold mb-2">Links</span>
+          <a href="#" class="banner-github-link mb-1 text-black hover:underline hover:text-stone-700">
+            Source code
+          </a>
+          <a href="#" class="banner-github-readme-link mb-1 text-black hover:underline hover:text-stone-700">
+            Documentation
+          </a>
+          <a href="#" class="banner-github-preview-link mb-1 text-black hover:underline hover:text-stone-700">
+            Example Screenshots
+          </a>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="row-start-4 col-span-1 flex flex-col items-stretch">
+          <span class="text-lg font-semibold mb-2">Contact us</span>
+          <a href="#" class="mb-1 banner-github-issues-link text-black hover:underline hover:text-stone-700">
+            Report an Issue
+          </a>
+        </div>
+        <!-- Horizontal Line -->
+        <div class="row-start-5 col-span-5 border-t border-slate-700"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -249,10 +324,11 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
 
-  <script src="global.js" type="text/javascript"></script>
-  <script src="permutationvalidation.js" type="text/javascript"> </script>
+  <script src="./component/global.js" type="text/javascript"></script>
+  <script src="./component/permutationvalidation.js" type="text/javascript"> </script>
   <script src="index.js" type="text/javascript"></script>
-  <script src="grid.js" type="text/javascript"></script>
+  <script src="./component/grid.js" type="text/javascript"></script>
+  <script src="./component/banner.js" type="text/javascript"></script>
 
 </body>
 
