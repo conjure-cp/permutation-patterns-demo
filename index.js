@@ -15,7 +15,7 @@ function setup() {
     sessionStorage.clear();
     sessionStorage.setItem("total", 0)
     UrlToPattern();
-
+    // initializeGrid();
 }
 
 /**
@@ -27,20 +27,27 @@ function setPermutationElements() {
     if (params.get('permutation')) { //the field needs to be filled
         var permutation = params.get('permutation').split(',')
         $('#permutation').val(permutation.length < 10 ? permutation.join('') : permutation.join(' ')); //formats the permutation appropriately 
-        $('#permutationbutton').val("Resubmit")
+        $('#permutationbutton').val("Visualise")
         $('#clearpattern').css("visibility", "visible");
         $('#addpatternbtn').css("visibility", "visible");
 
     }
     else { 
-        $('#permutationbutton').val("Submit")
+        $('#permutationbutton').val("Visualise")
         $('#permutation').val("")
         $('#clearpattern').css("visibility", "hidden");
         $('#addpatternbtn').css("visibility", "hidden");
 
-
     }
 }
+
+/** Add an empty grid that represents a sample 4x4 cell grid without a pattern to fill blank space */
+function initializeGrid() {
+    num = 4;
+    // Load the grid without any pattern
+    loadGrid(getPattern());
+}
+
 
 /**
 * Add a button to represent an underlying pattern that has been added 
@@ -217,7 +224,7 @@ window.addEventListener('popstate', function (event) {
 
     else {
         $('#addpatternbtn').val("add")
-        $('#addpatternbtn').text("Add Underlying Pattern")
+        $('#addpatternbtn').text("Submit Pattern")
         $('#deletepatternbtn').css("visibility", "hidden");
     }
 
@@ -263,7 +270,7 @@ $(document).on('click', '#addpatternbtn', function () {
     var pattern = JSON.stringify({ permutation: permutation, patterntype: patterntype, containment: containment, pattern: array })
 
     //if a new pattern is being added
-    if ($(this).text().trim() === "Add Underlying Pattern") {
+    if ($(this).text().trim() === "Submit Pattern") {
         var patternnumber = sessionStorage.getItem("total")
         //makes sure the maximum number of patterns hasn't been reached
         if (patternnumber >= `${environment.max_patterns}`) { 
