@@ -16,7 +16,9 @@ var property = JSON.stringify({
   "prop_mins_decomposable": "Minus Decomposable",
   "prop_involution": "Involution",
   "prop_derangement": "Derangement",
-  "prop_non_derangement": "Non-derangement"
+  "prop_non_derangement": "Non-derangement",
+  "prop_parity": "Parity",
+  "prop_non_parity": "Non-parity"
 })
 
 //the pattern types and their corresponding parameter label 
@@ -39,6 +41,8 @@ var statistic = JSON.stringify({
 })
 
 //the possible patterns that can be input (each pattern type can have avoidance and containment) 
+
+// all patterns are combination of pattern_names and concatenated with av / cont 
 var patterns = JSON.stringify({
   "classic_avoidance": [],
   "classic_containment": [],

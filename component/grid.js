@@ -183,7 +183,7 @@ function getPermutation() {
 
     else { //if there is no permutation
         var permutation = []
-        num = -1 //the grid will not be loaded
+        num = 4 //the grid will not be loaded
     }
 
     return permutation

@@ -15,7 +15,6 @@ function setup() {
     sessionStorage.clear();
     sessionStorage.setItem("total", 0)
     UrlToPattern();
-    // initializeGrid();
 }
 
 /**
@@ -39,13 +38,6 @@ function setPermutationElements() {
         $('#addpatternbtn').css("visibility", "hidden");
 
     }
-}
-
-/** Add an empty grid that represents a sample 4x4 cell grid without a pattern to fill blank space */
-function initializeGrid() {
-    num = 4;
-    // Load the grid without any pattern
-    loadGrid(getPattern());
 }
 
 
