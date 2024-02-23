@@ -179,11 +179,18 @@ function getPermutation() {
     if (urlParams.get('permutation')) { //if there is a permutation 
         var permutation = urlParams.get('permutation').split(',') //format the elements
         num = permutation.length //get the length of the permutation
+        sessionStorage.setItem('num', num);
     }
 
     else { //if there is no permutation
         var permutation = []
-        num = 4 //the grid will not be loaded
+        var storedNum = sessionStorage.getItem('num');
+        if (storedNum) {
+            num = parseInt(storedNum);
+        }
+        else {
+            num = 3; //default value if no stored value is found
+        }
     }
 
     return permutation
