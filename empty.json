@@ -16,7 +16,9 @@
     "prop_block_wise_simple": false,
     "prop_plus_decomposable": false,
     "prop_mins_decomposable": false,
-    "prob_involution": false,
-    "prob_derangement": false,
-    "prop_non_derangement": false
+    "prop_involution": false,
+    "prop_derangement": false,
+    "prop_non_derangement": false,
+    "prop_parity": false,
+    "prop_non_parity": false
 }
