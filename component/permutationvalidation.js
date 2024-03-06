@@ -46,7 +46,7 @@ $(document).on('click', '#permutationbutton', function () {
         currenturl.searchParams.set('permutation', array);
         window.history.pushState({}, '', currenturl);
         dispatchEvent(new PopStateEvent('popstate', {}));
-        $('#permutationbutton').val("Resubmit")
+        $('#permutationbutton').val("Visualise")
         $('#clearpattern').removeAttr('hidden')
         $('#addpatternbtn').removeAttr('hidden')
     }
