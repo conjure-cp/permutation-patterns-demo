@@ -16,7 +16,7 @@ function getResult() {
         fetch("https://conjure-aas.cs.st-andrews.ac.uk/get", {
             method: 'POST', headers: {
                 'Content-Type': 'application/json'
-            }, body: JSON.stringify({ jobid: id, appName: "permutation-patterns" })
+            }, body: JSON.stringify({ jobid: serverid, appName: "permutation-patterns" })
         }).then(response => response.json())
             .then(json => {
                 if (json.status == "wait") {
@@ -88,14 +88,14 @@ function showSolution(solution, stats) {
 }
 
 $(document).on('click', '#edit-btn', function () {
-    if (localStorage.getItem(id)) {
-        window.location.assign(localStorage.getItem(id))
+    if (localStorage.getItem(serverid)) {
+        window.location.assign(localStorage.getItem(serverid))
     }
 });
 
 $(document).on('click', '#new-btn', function () {
     var url = new URL(document.location);
-    url.searchParams.delete("id");
+    url.searchParams.delete("serverid");
     window.history.pushState({}, '', url);
     window.location.href = window.location.href.replace(window.location.pathname.split('/').pop(), '')
 
