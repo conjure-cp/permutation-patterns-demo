@@ -3,11 +3,7 @@ given length : int
 find perm : sequence (size length, injective) of int(1..length)
 find permPadded : matrix indexed by [int(0..length+1)] of int(0..length+1)
 
-
-
-
 given classic_avoidance : set of sequence of int
-
 
 such that
     forAll pattern in classic_avoidance .
@@ -17,37 +13,67 @@ such that
                 pattern(n1) < pattern(n2) <-> perm(ix[n1]) < perm(ix[n2])))
 
 
+given classic_containment : sequence of sequence of int
+find classic_containment_evidence : sequence (size |classic_containment|) of sequence (maxSize length) of int(1..length)
+find patterns : sequence (size |classic_containment|) of sequence (maxSize length) of int(1..length)
+
+$ the length of the evidence needs to match the length of the pattern
+such that
+    [ |ix| = |pattern|
+    | (patternId, pattern) <- classic_containment
+    , letting ix be classic_containment_evidence(patternId)
+    ]
+
+$ ...
+such that
+    [ forAll n1, n2 : int(1..|pattern|) . n1 < n2 -> ix(n1) < ix(n2)
+    | (patternId, pattern) <- classic_containment
+    , letting ix be classic_containment_evidence(patternId)
+    ]
+
+$ if two points are ordered in a particular way in the pattern
+$ they must also be ordered in the same way in the permutation
+such that
+    [ forAll n1, n2 : int(1..|pattern|) , n1 < n2 .
+        pattern(n1) < pattern(n2) <-> perm(ix(n1)) < perm(ix(n2))
+    | (patternId, pattern) <- classic_containment
+    , letting ix be classic_containment_evidence(patternId)
+    ]
+
+such that 
+    patterns = classic_containment
 
 
-given classic_containment : set of sequence of int
+$ such that
+$     forAll pattern in classic_containment .
+$          (exists ix : matrix indexed by [int(1..|pattern|)] of int(1..length) .
+$             (forAll i,j : int(1..|pattern|) . i < j -> ix[i] < ix[j]) /\
+$             (forAll n1, n2 : int(1..|pattern|) , n1 < n2 .
+$                 pattern(n1) < pattern(n2) <-> perm(ix[n1]) < perm(ix[n2])))
 
+
+given vincular_containment : sequence of (sequence (injective) of int, set of int)
+
+find vincular_containment_evidence : sequence (size |vincular_containment|) of sequence (maxSize length) of int(1..length)
 
 such that
-    forAll pattern in classic_containment .
-         (exists ix : matrix indexed by [int(1..|pattern|)] of int(1..length) .
-            (forAll i,j : int(1..|pattern|) . i < j -> ix[i] < ix[j]) /\
-            (forAll n1, n2 : int(1..|pattern|) , n1 < n2 .
-                pattern(n1) < pattern(n2) <-> perm(ix[n1]) < perm(ix[n2])))
-
-
-
-
-given vincular_containment : set of (sequence (injective) of int, set of int)
-
+    [ |ix| = |pattern|
+    | (patternId, (pattern, bars)) <- vincular_containment
+    , letting ix be vincular_containment_evidence(patternId)
+    ]
 
 such that
-    forAll (pattern, bars) in vincular_containment .
-        exists ix : matrix indexed by [int(1..|pattern|)] of int(1..length)
-        
-            , (forAll i,j : int(1..|pattern|) . i < j -> ix[i] < ix[j]) /\
-            $ n1 and n2 are indices
-            (forAll n1, n2 : int(1..|pattern|) , n1 < n2 .
-                (pattern(n1) < pattern(n2) <-> perm(ix[n1]) < perm(ix[n2]))
-            )
+    [ forAll bar in bars . ix(bar) + 1 = ix(bar+1)
+    | (patternId, (pattern, bars)) <- vincular_containment
+    , letting ix be vincular_containment_evidence(patternId)
+    , forAll i,j : int(1..|pattern|) . i < j -> ix(i) < ix(j)
+    , $ n1 and n2 are indices
+      forAll n1, n2 : int(1..|pattern|) , n1 < n2 .
+        (pattern(n1) < pattern(n2) <-> perm(ix(n1)) < perm(ix(n2)))
+    ] 
 
-            .
+branching on [perm]
 
-            (forAll bar in bars . ix[bar] + 1 = ix[bar+1])
 
 
 

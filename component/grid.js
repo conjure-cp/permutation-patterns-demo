@@ -6,6 +6,8 @@ var num = 0;
 var grid;
 var data;
 
+
+// idea: edit loadGrid to accept pattern and permutation. 
 loadGrid(getPattern())
 
 /**
@@ -15,6 +17,7 @@ function gridData() {
     var grid = document.getElementById("grid");
     var cs = getComputedStyle(grid.parentElement);
     this.containerWidth = (grid.clientWidth - parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight) - 5) * 0.65;
+    console.log(grid.parentElement, grid.clientWidth)
     var number = num + 1
     var data = new Array();
     var xpos = (grid.clientWidth - this.containerWidth) / 2;
@@ -53,10 +56,10 @@ function gridData() {
 * Loads the grid used to represent a permutation
 * @param pattern the shaded cells on the grid 
 */
-function loadGrid(pattern) {
+function loadGrid(pattern) {            // pattern from getPattern() loaded from URL
     var url = new URL(document.location);
     var urlParams = url.searchParams;
-    var permutation = getPermutation()
+    var permutation = getPermutation() // edit - loadgrid(perm - if perm = NULL -> index page -> num = 3)
 
     data = gridData();
 
@@ -103,7 +106,7 @@ function loadGrid(pattern) {
 
     if (representation == 2 || representation == 3) { //vincular or bivincular pattern
         column.on('click', function (d) {
-            data.forEach(function (value) { //licking a cell shades the entire column
+            data.forEach(function (value) { //clicking a cell shades the entire column
                 value.forEach(function (item) {
                     if (item.column == d.column) {
                         item.click++;
@@ -170,7 +173,7 @@ function loadGrid(pattern) {
 }
 
 /**
-* Gets the permutation that the grid is meant to be representing
+* Gets the permutation that the grid is meant to be representing - PERM NEVER IN URL.
 */
 function getPermutation() { 
     var url = new URL(document.location);
@@ -232,7 +235,7 @@ function resetClicks(value) {
 /**
 * Gets the cells that should be shaded on the grid
 */
-function getPattern() {
+function getPattern() {                     // stored in URL corresponds to each underlying pattern
     var url = new URL(document.location);
     var urlParams = url.searchParams;
 
