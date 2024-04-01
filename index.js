@@ -382,7 +382,7 @@ $(document).on('click', '#solvebtn', function () {
                         .then(response => response.text())
                         .then((data) => {
 
-                            localStorage["lastSubmitData"] = data
+                            localStorage["lastSubmitData"] = JSON.stringify(Object.assign(emptyData, inputs))
 
                             var details = {
                                 model: data,
