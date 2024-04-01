@@ -381,6 +381,8 @@ $(document).on('click', '#solvebtn', function () {
                     fetch('combined.essence') //fetch the computational model
                         .then(response => response.text())
                         .then((data) => {
+                            console.log("Solving using conjure-aas");
+                            console.log(data);
                             var details = {
                                 model: data,
                                 data: JSON.stringify(Object.assign(emptyData, inputs)), //all the required parameters have values
