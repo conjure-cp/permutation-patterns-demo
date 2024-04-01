@@ -423,7 +423,7 @@ function getResult(id, statistics) {
         }
     }
 
-    var url = "result.html?id=" + id //job id from the solver
+    var url = "result.html?" + window.location.search + "&serverid=" + id //job id from the solver
 
 
     if (stats.length > 0) {

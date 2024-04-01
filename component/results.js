@@ -1,6 +1,6 @@
 var url = new URL(document.location);
 var urlParams = url.searchParams;
-var id = urlParams.get("id")
+var serverid = urlParams.get("serverid")
 
 $('#new-btn').css("visibility", "hidden");
 $('#edit-btn').css("visibility", "hidden");
@@ -32,7 +32,7 @@ function getResult() {
                     else {
                         document.getElementById("result-container").textContent = JSON.stringify(json, undefined, 2);
                     }
-                    if (localStorage.getItem(id)) {
+                    if (localStorage.getItem(serverid)) {
                         $('#edit-btn').css("visibility", "visible");
                     }
                     $('#new-btn').css("visibility", "visible");
