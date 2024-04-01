@@ -31,7 +31,7 @@ function setPermutationElements() {
         $('#addpatternbtn').css("visibility", "visible");
 
     }
-    else { 
+    else {
         $('#permutationbutton').val("Visualise")
         $('#permutation').val("")
         $('#clearpattern').css("visibility", "hidden");
@@ -45,8 +45,8 @@ function setPermutationElements() {
 * Add a button to represent an underlying pattern that has been added 
 */
 function addNewPattern(id, pattern) {
-    const label = document.createElement("label"); 
-    label.classList.add("btn"); 
+    const label = document.createElement("label");
+    label.classList.add("btn");
     label.classList.add("mr-4");
     label.classList.add("mb-2");
     label.classList.add("patternbtn");
@@ -147,7 +147,7 @@ function resetParams() {
     urlParams.delete("permutation")
     urlParams.delete("contain")
     urlParams.set('type', 1);
-    window.history.pushState({}, '', url); 
+    window.history.pushState({}, '', url);
     dispatchEvent(new PopStateEvent('popstate', {})); //firest the pop state event
 }
 
@@ -265,7 +265,7 @@ $(document).on('click', '#addpatternbtn', function () {
     if ($(this).text().trim() === "Submit Pattern") {
         var patternnumber = sessionStorage.getItem("total")
         //makes sure the maximum number of patterns hasn't been reached
-        if (patternnumber >= `${environment.max_patterns}`) { 
+        if (patternnumber >= `${environment.max_patterns}`) {
             $('#maxPatterns').modal('show'); //show popup alert
         }
         else { //store the new pattern
@@ -294,7 +294,7 @@ $(document).on('click', '#addpatternbtn', function () {
     sessionStorage.setItem("total", count) //updates the total number of patterns
 
     patternToUrl(JSON.parse(pattern)) //adds the pattern information to the URL
-    resetParams(url, urlParams); 
+    resetParams(url, urlParams);
 
 });
 
@@ -331,7 +331,7 @@ function deletePatternUrl(pattern) {
             index = i; //store the index
         }
         allpatterns[i] = "-" + allpatterns[i] + "," //ensure the data is formatted correctly
-    }); 
+    });
     if (index != null) { //if the pattern to be deleted was found
         allpatterns.splice(index) //remove it from the array of pattern information 
         if (index == 0 && allpatterns.length == 1) { //if there are no added patterns now
@@ -353,7 +353,7 @@ function deletePatternUrl(pattern) {
 */
 $(document).on('click', '#solvebtn', function () {
     var numberPatterns = sessionStorage.getItem("total");
-    let patterns = [] 
+    let patterns = []
     for (let i = 0; i < numberPatterns; i++) { //gets all the added patterns
         patterns[i] = JSON.parse(sessionStorage.getItem(i));
     }
@@ -381,8 +381,9 @@ $(document).on('click', '#solvebtn', function () {
                     fetch('combined.essence') //fetch the computational model
                         .then(response => response.text())
                         .then((data) => {
-                            console.log("Solving using conjure-aas");
-                            console.log(data);
+
+                            localStorage["lastSubmitData"] = data
+
                             var details = {
                                 model: data,
                                 data: JSON.stringify(Object.assign(emptyData, inputs)), //all the required parameters have values
@@ -506,7 +507,7 @@ $(document).on('change', ':checkbox', function () {
     if ($(this).attr("id") === "all-statistic") { //if it is the all checkbox
         var check = false;
         if ($("#all-statistic").is(':checked')) { //if it has been checked
-            check = true; 
+            check = true;
         }
         $('input:checkbox[id^="stat_"]').each(function () {
             $(this).prop('checked', check); //checks or unchecks all the statistic checkboxes
@@ -514,7 +515,7 @@ $(document).on('change', ':checkbox', function () {
     }
 
     //if all the statistic checkboxes except for the "all" checkbox is checked
-    else if($('input:checkbox[id^="stat_"]').length === $('input:checkbox[id^="stat_"]:checked').length && !$("#all-statistic").is(':checked')) {
+    else if ($('input:checkbox[id^="stat_"]').length === $('input:checkbox[id^="stat_"]:checked').length && !$("#all-statistic").is(':checked')) {
         $("#all-statistic").prop('checked', true) //also check the "all" checkbox
     }
 
@@ -523,7 +524,7 @@ $(document).on('change', ':checkbox', function () {
         if (id.includes("stat")) {
             $("#all-statistic").prop('checked', false);
         }
-        
+
 
     }
 

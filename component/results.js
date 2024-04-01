@@ -5,6 +5,8 @@ var id = urlParams.get("id")
 $('#new-btn').css("visibility", "hidden");
 $('#edit-btn').css("visibility", "hidden");
 
+console.log(localStorage["lastSubmitData"])
+
 getResult();
 
 function getResult() {
@@ -14,7 +16,7 @@ function getResult() {
         fetch("https://conjure-aas.cs.st-andrews.ac.uk/get", {
             method: 'POST', headers: {
                 'Content-Type': 'application/json'
-            },  body: JSON.stringify({ jobid: id, appName: "permutation-patterns" })
+            }, body: JSON.stringify({ jobid: id, appName: "permutation-patterns" })
         }).then(response => response.json())
             .then(json => {
                 if (json.status == "wait") {
@@ -37,7 +39,7 @@ function getResult() {
 
                 }
 
-                
+
 
             })
     }
@@ -91,10 +93,11 @@ $(document).on('click', '#edit-btn', function () {
     }
 });
 
-$(document).on('click', '#new-btn', function() {
+$(document).on('click', '#new-btn', function () {
     var url = new URL(document.location);
     url.searchParams.delete("id");
     window.history.pushState({}, '', url);
     window.location.href = window.location.href.replace(window.location.pathname.split('/').pop(), '')
-    
+
 })
+
