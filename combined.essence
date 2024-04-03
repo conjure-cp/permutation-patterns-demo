@@ -56,8 +56,22 @@ given vincular_containment : sequence of (sequence (injective) of int, set of in
 
 find vincular_containment_evidence : sequence (size |vincular_containment|) of sequence (maxSize length) of int(1..length)
 
+$ the length of the evidence needs to match the length of the pattern
 such that
     [ |ix| = |pattern|
+    | (patternId, (pattern, bars)) <- vincular_containment
+    , letting ix be vincular_containment_evidence(patternId)
+    ]
+
+such that
+    [ forAll n : int(1..|pattern|-1) . ix(n) < ix(n+1)
+    | (patternId, (pattern, bars)) <- vincular_containment
+    , letting ix be vincular_containment_evidence(patternId)
+    ]
+
+such that
+    [ forAll n1, n2 : int(1..|pattern|) , n1 < n2 .
+        (pattern(n1) < pattern(n2) <-> perm(ix(n1)) < perm(ix(n2)))
     | (patternId, (pattern, bars)) <- vincular_containment
     , letting ix be vincular_containment_evidence(patternId)
     ]
@@ -66,16 +80,10 @@ such that
     [ forAll bar in bars . ix(bar) + 1 = ix(bar+1)
     | (patternId, (pattern, bars)) <- vincular_containment
     , letting ix be vincular_containment_evidence(patternId)
-    , forAll i,j : int(1..|pattern|) . i < j -> ix(i) < ix(j)
-    , $ n1 and n2 are indices
-      forAll n1, n2 : int(1..|pattern|) , n1 < n2 .
-        (pattern(n1) < pattern(n2) <-> perm(ix(n1)) < perm(ix(n2)))
-    ] 
+    ]
+
 
 branching on [perm]
-
-
-
 
 
 given vincular_avoidance : set of (sequence (injective) of int, set of int)
