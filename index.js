@@ -616,7 +616,7 @@ function getPatterns(patterns) {
             pattern = [perm, grid_pattern]
         }
 
-        pattern_types[names[representation_name] + containment].push(pattern); //adds the pattern to the correct paramter
+        pattern_types[names[representation_name] + containment].push(pattern); //adds the pattern to the correct parameter
 
     });
 

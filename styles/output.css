@@ -422,3 +422,11 @@
 .hover\:underline:hover {
   text-decoration-line: underline
 }
+
+.perm-sol-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: 1px solid white;
+}
