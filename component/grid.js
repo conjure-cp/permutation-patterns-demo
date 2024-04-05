@@ -99,7 +99,7 @@ function loadGrid(pattern, permutation, grid_id) {            // pattern from ge
         .style("stroke", "#222")
 
     permutation.forEach(function(val, index) { // note - index is x , val is y
-        createDot(val, index, (permutation.length < 9 ? 10 - (permutation.length) * 1 : 15 - 8 * 1), "black", "black");
+        createDot(val, index, (permutation.length < 11 ? 10 - (permutation.length) : 15 - 8 * 1), "black", "black");
     })  
 
     function createDot(value, index, rad, fill_colour, stroke_colour) {
@@ -112,8 +112,8 @@ function loadGrid(pattern, permutation, grid_id) {            // pattern from ge
             .style("stroke", stroke_colour);
     }
 
-    function plotEvidence(type, patterns){
-        pattern.get(type).forEach(function(evidence, i){
+    function plotEvidence(type, patterns){ // patterns - specified on input
+        pattern.get(type).forEach(function(evidence, i){ // uses pattern map function to find corresponding evidence
             var colour = colour_id[evidence_count]
             var evidence_x = evidence;
 
@@ -126,17 +126,22 @@ function loadGrid(pattern, permutation, grid_id) {            // pattern from ge
             });
 
             if (type == "vinc-cont"){
-                patterns.forEach(function(bar_param, i){
-                    bar_param[1].forEach(function(x){
-                        grid.selectAll(".square").each(function (d) {
-                            if (d.column == evidence[x - 1]) { //if the cell is meant to be shaded then display it as such
-                                d3.select(this).style("fill", colour)
-                                .attr('fill-opacity', 0.2)
-                            }
-                        })
-                    })
+                var bar_param = patterns[i][1];   // gives bars corresponding to evidence set.
+                bar_param.forEach(function(x){ // bar_param specifies shaded bars in vinc- pattern
+                        
+                grid.selectAll(".square").each(function (d) {
+                    
+                // Modify - should only shade n columns for n shaded bars.
+                    if (d.column == evidence[x] - 1) { //if the cell is meant to be shaded then display it as such
+                        d3.select(this).style("fill", colour)
+                        .attr('fill-opacity', 0.2)
+                        // console.log(bar_param[1], evidence, d)
+                    }
                 })
+            })
             }
+
+            // Methods to be extended for other pattern types. 
 
             grid.append("text")
                 .attr("x", 1.6*containerWidth)
@@ -166,6 +171,8 @@ function loadGrid(pattern, permutation, grid_id) {            // pattern from ge
         if (vincular_cont_pattern.length > 0){
             plotEvidence("vinc-cont", vincular_cont_pattern)
         }
+
+        // To be extended to other patterns on modification of the Essence models. 
 
     } else {
 
