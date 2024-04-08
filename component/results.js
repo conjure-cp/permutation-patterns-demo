@@ -57,7 +57,7 @@ function showResults(results) {
     }
 
     // Creates array of a colour for each pattern input for whole solution set. Accessed in grid.js
-    for (var i = 0; i < patterns.length; i++){
+    for (var i = 0; i < patterns.length; i++) {
         colour_id[i] = getColour()
     }
 
@@ -83,11 +83,11 @@ function showSolution(solution, stats) {
 
     // Record evidence relevant to each solution
     var evidence_map = new Map()
-    if (patterns.classic_containment.length > 0){
+    if (patterns.classic_containment.length > 0) {
         evidence_map.set("cl-cont", solution.classic_containment_evidence)
     }
-    if (patterns.vincular_containment.length > 0){
-        evidence_map.set("vinc-cont",solution.vincular_containment_evidence)
+    if (patterns.vincular_containment.length > 0) {
+        evidence_map.set("vinc-cont", solution.vincular_containment_evidence)
     }
 
     if (stats) {
@@ -106,16 +106,16 @@ function showSolution(solution, stats) {
         var grid_id = "grid" + permutation.toString()
 
         var grid = d3.select("#solutioncontainer").append("svg")
-        .attr("id", grid_id)  
-        .attr("width", 300*permutation.length)      // Container for whole grid svg.
-        .attr("height", permutation.length * 50 );
+            .attr("id", grid_id)
+            .attr("width", 300 * permutation.length)      // Container for whole grid svg.
+            .attr("height", permutation.length * 50);
 
-        loadGrid(evidence_map, Array.from(String(permutation), Number), grid_id) 
+        loadGrid(evidence_map, Array.from(String(permutation), Number), grid_id)
     }
-         
+
 }
 
-function getColour(){
+function getColour() {
     var rgbVal = [];
     for (let i = 0; i < 3; i++) {
         rgbVal.push((Math.floor(Math.random() * 256)).toString(16).padStart(2, '0'));

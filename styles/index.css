@@ -1,10 +1,11 @@
 :root {
     --colour-btn-font: white;
     --colour-btn-selected: #052849;
-    --colour-btn : #0a77de;
-    --colour-hover : #084d8e;
-  }
-  html,
+    --colour-btn: #0a77de;
+    --colour-hover: #084d8e;
+}
+
+html,
 body {
     height: 100%;
     width: 100%;
@@ -33,12 +34,14 @@ body {
 .modal-dialog {
     height: 80%;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     display: none;
 }
 
-.btn.focus, .btn:focus {
+.btn.focus,
+.btn:focus {
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }

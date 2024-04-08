@@ -14,7 +14,7 @@
 
   <script src="https://d3js.org/d3.v4.min.js"></script>
 
-  <link rel="stylesheet" href="./styles/output.css" >
+  <link rel="stylesheet" href="./styles/output.css">
   <link rel="stylesheet" href="./styles/index.css">
 
   <title>Permutation Patterns</title>
@@ -29,8 +29,8 @@
         <svg class="w-100 align-self-center" id="grid"></svg>
       </div>
       <div class="d-flex align-items-end">
-        <button type="button" class="bg-red-600 btn btn-danger" id="clearpattern" data-toggle="tooltip" data-placement="top"
-          title="Click here to clear the pattern on the grid">Clear Pattern</button>
+        <button type="button" class="bg-red-600 btn btn-danger" id="clearpattern" data-toggle="tooltip"
+          data-placement="top" title="Click here to clear the pattern on the grid">Clear Pattern</button>
       </div>
     </div>
 
@@ -61,8 +61,8 @@
                   there currently being a maximum of 5 underlying patterns that can be added.</strong></p>
               <p><em>Adding an underlying pattern:</em> </p>
               Enter a permutation and click submit to validate it. Doing this will show the appropriate visual
-              representation and show the button to add the underlying pattern. Larger permutations (i.e. has a 
-              length > 9) should have spaces in between each digit.  
+              representation and show the button to add the underlying pattern. Larger permutations (i.e. has a
+              length > 9) should have spaces in between each digit.
               <br> </br>
               Select one of the 6 pattern types and whether you want the pattern to be an avoidance or containment
               pattern.
@@ -79,17 +79,21 @@
               clicking the button again will deselect it and will allow you to add another underlying pattern again.
               <br> </br>
               <p><em>Search space:</em> </p>
-              There are 6 permutation properties that can be chosen and it is possible to select more than one.  
+              There are 6 permutation properties that can be chosen and it is possible to select more than one.
               <br> </br>
-              The length is the only input as part of the search space that is required and must be at least one larger than the smallest underlying pattern.
+              The length is the only input as part of the search space that is required and must be at least one larger
+              than the smallest underlying pattern.
               <br> </br>
-              Any number of statistics can also be selected, which will be shown for each solution to the permutation problem
-           
+              Any number of statistics can also be selected, which will be shown for each solution to the permutation
+              problem
+
               <br> </br>
               <p><em>Solving</em></p>
-              Click the solve button to solve the permutation problem. This will lead you to a seperate page that will show all the solutions to the problem (max 10,000).
+              Click the solve button to solve the permutation problem. This will lead you to a seperate page that will
+              show all the solutions to the problem (max 10,000).
               <br> </br>
-              Copying and pasting the url prior to clicking solve will maintain the parameters for the permutation problem, allowing you to share the link with others.  
+              Copying and pasting the url prior to clicking solve will maintain the parameters for the permutation
+              problem, allowing you to share the link with others.
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -104,7 +108,8 @@
         <label for="permutation" class="col-sm-auto align-self-center col-form-label pr-0">Permutation:</label>
         <div class="col-form-label col-sm-auto w-50 pl-0">
           <input required class="form-control" id="permutation" name="permutation" data-toggle="tooltip"
-            data-placement="top" title="Enter the permutation for a pattern here. Use spaces in between the digits for permutations of a length larger than 9.">
+            data-placement="top"
+            title="Enter the permutation for a pattern here. Use spaces in between the digits for permutations of a length larger than 9.">
           <div class="invalid-feedback">
             Permutation is invalid
           </div>
@@ -157,9 +162,9 @@
   <!-- 2. Added Pattern(s) -->
   <div class="d-flex flex-column container p-4">
     <div class="d-flex align-items-center">
-      <h4 class="mt-2 mr-2 p-4" data-toggle="tooltip" data-placement="top" 
-          title="All the added underlying patterns. Click to select an added pattern and view it, and click it again to deselect it. "> 
-          Added Pattern(s): 
+      <h4 class="mt-2 mr-2 p-4" data-toggle="tooltip" data-placement="top"
+        title="All the added underlying patterns. Click to select an added pattern and view it, and click it again to deselect it. ">
+        Added Pattern(s):
       </h4>
       <div id="added-patterns-container" class="btn-group btn-group-toggle justify-content-between overflow-auto">
 
@@ -217,9 +222,10 @@
       <label for="length" class="col-sm-auto align-self-center col-form-label pr-0 ">Length:</label>
       <div class="col-form-label col-sm-auto w-75 ">
         <input required class="form-control" id="length" name="length" type="number" data-toggle="tooltip"
-          data-placement="top" title="Enter a length that all solutions must be (at least one larger than the shortest pattern)">
+          data-placement="top"
+          title="Enter a length that all solutions must be (at least one larger than the shortest pattern)">
         <div class="invalid-feedback">
-          Invalid length. 
+          Invalid length.
         </div>
       </div>
     </div>
@@ -235,12 +241,12 @@
 
     </div>
   </div>
-<!-- 4. Solve Button -->
+  <!-- 4. Solve Button -->
   <div class="d-flex flex-column container">
     <button class="btn btn-success w-25 align-self-end mb-4" id="solvebtn" data-toggle="tooltip" data-placement="top"
       title="Click here to solve the problem with the provided inputs"> Solve</button>
   </div>
-<!-- 5. Banner -->
+  <!-- 5. Banner -->
   <div id="banner" class="bg-stone-100">
     <div class="banner-container p-4 ">
       <div class="container m-auto grid grid-cols-5 grid-flow-col-dense gap-2">
@@ -249,7 +255,8 @@
           <div class="flex items-center m-1">
             <img src="assets/images/conjure-cp-logo.png" alt="conjure-cp" class="w-16 h-16">
             <div class="text-xl font-semibold ml-4">
-              <a href="#" class="banner-logo-link text-black hover:underline hover:text-stone-700"> <!-- Logo Text Placeholder --> </a>
+              <a href="#" class="banner-logo-link text-black hover:underline hover:text-stone-700">
+                <!-- Logo Text Placeholder --> </a>
             </div>
           </div>
           <div class="banner-title text-3xl font-bold tracking-wide mb-4 m-1"> <!-- Title Text Placeholder --> </div>
@@ -258,10 +265,10 @@
             License: <!-- License Text Placeholder -->
           </div>
         </div>
-    
+
         <!-- Horizontal Line -->
         <div class="row-start-1 col-span-5 border-t border-stone-700"></div>
-    
+
         <!-- Project Author -->
         <div class="row-start-2 col-span-1 flex flex-col items-stretch">
           <span class="text-lg font-semibold mb-2">Project Author</span>
@@ -271,7 +278,7 @@
             </a>
           </div>
         </div>
-    
+
         <!-- Project Contributors -->
         <div class="row-start-2 col-span-2 flex flex-col items-stretch">
           <span class="text-lg font-semibold mb-2">Project Contributors</span>
@@ -279,10 +286,10 @@
             <!-- Contributors will be loaded here by JavaScript -->
           </p>
         </div>
-    
+
         <!-- Horizontal Line -->
         <div class="row-start-3 col-span-3 border-t border-slate-700"></div>
-    
+
         <!-- Additional Links -->
         <div class="row-start-4 col-span-1 flex flex-col items-stretch">
           <span class="text-lg font-semibold mb-2">Links</span>
@@ -309,7 +316,7 @@
       </div>
     </div>
   </div>
-</div>
+  </div>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
