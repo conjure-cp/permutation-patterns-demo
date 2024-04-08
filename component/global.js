@@ -65,6 +65,6 @@ var environment = {
   "properties": property,
   "max_patterns": 5, //the maximum number of underlying patterns that can added as part of a permutation problem
   "pattern_types": patterns,
-  "pattern_names":pattern_names,
-  "statistics" : statistic,
+  "pattern_names": pattern_names,
+  "statistics": statistic,
 }
