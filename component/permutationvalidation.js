@@ -6,7 +6,7 @@ function isValidPermutation(permutation) {
         if (/\s/g.test(permutation)) {
             var permutation = permutation.split(" ");
             array = permutation.slice()
-            
+
             permutation.sort((a, b) => a - b);
             var largest = (permutation.slice(-1).pop())
         }

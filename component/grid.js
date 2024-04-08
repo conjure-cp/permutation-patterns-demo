@@ -21,7 +21,7 @@ function gridData(i, n) {
     var grid = document.getElementById("grid");
     var data = new Array();
 
-    if ( i == 0){ // Input page 
+    if (i == 0) { // Input page 
         var cs = getComputedStyle(grid.parentElement);
         this.clientWidth = grid.clientWidth
         this.containerWidth = (clientWidth - parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight) - 5) * 0.65;
@@ -32,12 +32,12 @@ function gridData(i, n) {
         var number = n + 1          // from perm length 
     }
 
-    var xpos = (clientWidth - this.containerWidth) / 2 ;
+    var xpos = (clientWidth - this.containerWidth) / 2;
     var ypos = 5;
-    this.width = this.containerWidth / number - 1 ;
+    this.width = this.containerWidth / number - 1;
     this.height = this.width;
     var click = 0;
-        
+
     // iterate for rows	
     for (var row = 0; row < number; row++) {
         data.push(new Array());
@@ -98,9 +98,9 @@ function loadGrid(pattern, permutation, grid_id) {            // pattern from ge
         .style("fill", "#FFFFFF")
         .style("stroke", "#222")
 
-    permutation.forEach(function(val, index) { // note - index is x , val is y
+    permutation.forEach(function (val, index) { // note - index is x , val is y
         createDot(val, index, (permutation.length < 11 ? 10 - (permutation.length) : 15 - 8 * 1), "black", "black");
-    })  
+    })
 
     function createDot(value, index, rad, fill_colour, stroke_colour) {
         var xpos = (this.clientWidth - this.containerWidth) / 2;
@@ -112,63 +112,63 @@ function loadGrid(pattern, permutation, grid_id) {            // pattern from ge
             .style("stroke", stroke_colour);
     }
 
-    function plotEvidence(type, patterns){ // patterns - specified on input
-        pattern.get(type).forEach(function(evidence, i){ // uses pattern map function to find corresponding evidence
+    function plotEvidence(type, patterns) { // patterns - specified on input
+        pattern.get(type).forEach(function (evidence, i) { // uses pattern map function to find corresponding evidence
             var colour = colour_id[evidence_count]
             var evidence_x = evidence;
 
-            var evidence_y = evidence.map(function(x) {
-                return permutation[x-1] 
+            var evidence_y = evidence.map(function (x) {
+                return permutation[x - 1]
             });
 
-            evidence_x.forEach(function(x, j) {
-                createDot(evidence_y[j], x - 1, 10 + 5*evidence_count, "none", colour)
+            evidence_x.forEach(function (x, j) {
+                createDot(evidence_y[j], x - 1, 10 + 5 * evidence_count, "none", colour)
             });
 
-            if (type == "vinc-cont"){
+            if (type == "vinc-cont") {
                 var bar_param = patterns[i][1];   // gives bars corresponding to evidence set.
-                bar_param.forEach(function(x){ // bar_param specifies shaded bars in vinc- pattern
-                        
-                grid.selectAll(".square").each(function (d) {
-                    
-                // Modify - should only shade n columns for n shaded bars.
-                    if (d.column == evidence[x] - 1) { //if the cell is meant to be shaded then display it as such
-                        d3.select(this).style("fill", colour)
-                        .attr('fill-opacity', 0.2)
-                        // console.log(bar_param[1], evidence, d)
-                    }
+                bar_param.forEach(function (x) { // bar_param specifies shaded bars in vinc- pattern
+
+                    grid.selectAll(".square").each(function (d) {
+
+                        // Modify - should only shade n columns for n shaded bars.
+                        if (d.column == evidence[x] - 1) { //if the cell is meant to be shaded then display it as such
+                            d3.select(this).style("fill", colour)
+                                .attr('fill-opacity', 0.2)
+                            // console.log(bar_param[1], evidence, d)
+                        }
+                    })
                 })
-            })
             }
 
             // Methods to be extended for other pattern types. 
 
             grid.append("text")
-                .attr("x", 1.6*containerWidth)
+                .attr("x", 1.6 * containerWidth)
                 .attr("y", containerWidth / 10 + 30 * evidence_count)
                 .attr("text-anchor", "middle")
-                .text("Evidence for  " + JSON.stringify(patterns[i])) 
+                .text("Evidence for  " + JSON.stringify(patterns[i]))
                 .style("fill", colour)
                 .style("font-size", 15)
 
             evidence_count++;
         })
-        
+
     }
 
     // If on solutions, pattern = evidence
-    if (url.toString().includes("result") && pattern !== null){
+    if (url.toString().includes("result") && pattern !== null) {
 
         // Retrieve patterns from input
         input_patterns = JSON.parse(localStorage["lastSubmitData"]);
 
         classic_cont_pattern = input_patterns.classic_containment;
-        if (classic_cont_pattern.length > 0){
+        if (classic_cont_pattern.length > 0) {
             plotEvidence("cl-cont", classic_cont_pattern)
         }
 
         vincular_cont_pattern = input_patterns.vincular_containment;
-        if (vincular_cont_pattern.length > 0){
+        if (vincular_cont_pattern.length > 0) {
             plotEvidence("vinc-cont", vincular_cont_pattern)
         }
 
@@ -184,10 +184,10 @@ function loadGrid(pattern, permutation, grid_id) {            // pattern from ge
                 }
             })
         }
-    
+
         // All the methods below are dynamic methods dedicated to shading on click / input
         var representation = urlParams.get('type');
-    
+
         if (representation == 2 || representation == 3) { //vincular or bivincular pattern
             column.on('click', function (d) {
                 data.forEach(function (value) { //clicking a cell shades the entire column
@@ -196,12 +196,12 @@ function loadGrid(pattern, permutation, grid_id) {            // pattern from ge
                             item.click++;
                         }
                     })
-    
+
                 })
-    
+
                 if ((d.click) % 2 == 0) { //if the shading needs to be removed
                     row.selectAll(".column_" + d.column).style("fill", "#FFFFFF");
-    
+
                     if (representation == 3) {
                         grid.selectAll(".square").each(function (square) {
                             if (!(square.row == 0 || square.row == permutation.length)) { //all rows but the boundary rows
@@ -220,10 +220,10 @@ function loadGrid(pattern, permutation, grid_id) {            // pattern from ge
                         })
                     }
                 }
-    
+
             });
         }
-    
+
         else if (representation == 4) { //mesh pattern
             column.on('click', function (d) { //any cell can be clicked
                 d.click++;
@@ -234,9 +234,9 @@ function loadGrid(pattern, permutation, grid_id) {            // pattern from ge
                     d3.select(this).style("fill", "#AEAEAE"); //add shading
                 }
             });
-    
+
         }
-    
+
         else if (representation == 5) { //boxed mesh 
             grid.selectAll(".square").each(function (d) { //shade all cells but the boundary ones
                 if ((!(d.row == 0 || d.row == permutation.length)) && !(d.column == 0 || d.column == permutation.length)) {
@@ -244,7 +244,7 @@ function loadGrid(pattern, permutation, grid_id) {            // pattern from ge
                 }
             })
         }
-    
+
         else if (representation == 6) { //consecutive pattern
             grid.selectAll(".square").each(function (d) { //all columns but the boundary ones
                 if (!(d.column == 0 || d.column == permutation.length)) {
@@ -252,7 +252,7 @@ function loadGrid(pattern, permutation, grid_id) {            // pattern from ge
                 }
             })
         }
-    
+
 
     }
 
@@ -261,7 +261,7 @@ function loadGrid(pattern, permutation, grid_id) {            // pattern from ge
 /**
 * Gets the permutation that the grid is meant to be representing - PERM NEVER IN URL
 */
-function getPermutation() { 
+function getPermutation() {
     var url = new URL(document.location);
     var urlParams = url.searchParams;
 
