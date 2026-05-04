@@ -3,11 +3,13 @@ module.exports = {
   corePlugins: {
     preflight: false
   },
-  content: ["./**/*.{html,js}"],
+  content: [
+    "./*.html",
+    "./index.js",
+    "./component/**/*.js",
+  ],
   theme: {
     extend: {},
   },
   plugins: [],
-  purge: ['./**/*.html'] // remove unused styles in production
 }
-
