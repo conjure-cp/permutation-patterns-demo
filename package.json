@@ -19,8 +19,7 @@
   },
   "homepage": "https://github.com/conjure-cp/permutation-patterns-demo#readme",
   "devDependencies": {
-    "autoprefixer": "^10.5.0",
-    "postcss": "^8.5.13",
-    "tailwindcss": "^3.4.19"
+    "@tailwindcss/cli": "^4.2.4",
+    "tailwindcss": "^4.2.4"
   }
 }
