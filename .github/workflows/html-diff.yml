@@ -1,0 +1,73 @@
+name: Generated HTML diff
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  html-diff:
+    name: Compare generated HTML
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout base
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+
+      - name: Build base export
+        run: |
+          mkdir build
+          cp -r assets component styles index.html build
+          cp *.json *.html *.js combined.essence build
+          mkdir -p "$RUNNER_TEMP/base-html"
+          find build -name "*.html" -type f -exec cp --parents {} "$RUNNER_TEMP/base-html" \;
+
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Build PR export
+        run: |
+          mkdir build
+          cp -r assets component styles index.html build
+          cp *.json *.html *.js combined.essence build
+          mkdir -p "$RUNNER_TEMP/head-html"
+          find build -name "*.html" -type f -exec cp --parents {} "$RUNNER_TEMP/head-html" \;
+
+      - name: Compare exported HTML
+        id: diff
+        run: |
+          diff -ru "$RUNNER_TEMP/base-html/build" "$RUNNER_TEMP/head-html/build" > "$RUNNER_TEMP/generated-html.diff" || true
+
+          if [ -s "$RUNNER_TEMP/generated-html.diff" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            {
+              echo "## Generated HTML changed"
+              echo
+              echo "This is informational only. Review the uploaded \`generated-html-diff\` artifact if the HTML changes are unexpected."
+              echo
+              echo '```diff'
+              head -n 200 "$RUNNER_TEMP/generated-html.diff"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            {
+              echo "## Generated HTML unchanged"
+              echo
+              echo "The exported HTML files match the base branch."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload generated HTML diff
+        if: steps.diff.outputs.changed == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: generated-html-diff
+          path: ${{ runner.temp }}/generated-html.diff
+          if-no-files-found: error
