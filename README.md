@@ -38,6 +38,18 @@ This command will watch for changes in your Tailwind CSS file and automatically 
 ctrl + c
 ```
 
+## Generated asset comparison
+
+Pull requests build the base and head revisions in the same environment and
+compare every generated HTML, JavaScript (`.js`, `.mjs`, `.cjs`), and CSS file in
+`build/`. The check fails on any byte or filename difference, including asset
+hashes; nothing is normalized. Changed files appear in the job summary, and the
+`generated-assets-diff` artifact contains the recursive diff. Intentional output
+changes therefore also fail this comparison and need review.
+
+The comparison uses the same static-file packaging commands as deployment;
+JavaScript and CSS are copied from the repository rather than compiled there.
+
 ## License
 
 This project is licensed under the Mozilla Public License 2.0. For full license information, please see the [LICENSE](./LICENSE) file in the repository.
